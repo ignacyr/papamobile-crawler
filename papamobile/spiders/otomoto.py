@@ -1,19 +1,21 @@
 import scrapy
 
-
 class OtomotoSpider(scrapy.Spider):
     name = "otomoto"
 
     def start_requests(self):
         urls = [
-            'https://nofluffjobs.com/pl'
+            f'https://www.otomoto.pl/osobowe?search%5Border%5D=created_at_first%3Adesc&page={i}'
+            for i in range(1, 2)
         ]
         for url in urls:
             yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
-        filename = 'otomoto.html'
-        with open(filename, 'wb') as f:
-            f.write(response.body)
-        self.log(f'Saved file {filename}')
+        for url in response.xpath('//a/@href').getall():
+            if 'https://www.otomoto.pl/oferta/' in url:
+                print(url)
+                yield scrapy.Request(url=url, callback=self.parse_cars)
 
+    def parse_cars(self, response):
+        
