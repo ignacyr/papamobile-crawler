@@ -1,5 +1,5 @@
 import scrapy
-from datetime import datetime
+from datetime import datetime, timedelta
 import lxml.html
 
 
@@ -30,6 +30,9 @@ class OtomotoSpider(scrapy.Spider):
             time_date = time_date.replace(month, months_map[month])
         time_date = datetime.strptime(time_date, '%H:%M, %d %m %Y')
 
+        if time_date.date() < datetime.today() - timedelta(days=1):
+            ddddddddd
+            raise CloseSpider('Scraped all offers')
         title = response.xpath('//h1[@class="offer-title big-text"]/text()').getall()[-1].strip()
         title = ' '.join(title.split())
 
