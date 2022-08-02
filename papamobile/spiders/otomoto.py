@@ -1,7 +1,6 @@
 import scrapy
 from datetime import datetime
 import lxml.html
-import bs4
 
 
 class OtomotoSpider(scrapy.Spider):
