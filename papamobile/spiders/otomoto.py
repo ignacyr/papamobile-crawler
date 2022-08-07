@@ -32,9 +32,9 @@ class OtomotoSpider(scrapy.Spider):
                       "października": "10", "listopada": "11", "grudnia": "12"}
         for month in months_map.keys():
             time_date = time_date.replace(month, months_map[month])
-        car["time_date"] = datetime.strptime(time_date, '%H:%M, %d %m %Y')
+        car["added"] = datetime.strptime(time_date, '%H:%M, %d %m %Y')
         
-        if car["time_date"].date() == self.yesterday:
+        if car["added"].date() == self.yesterday:
             title = response.xpath('//h1[@class="offer-title big-text"]/text()').getall()[-1].strip()
             car["title"] = ' '.join(title.split())
     
@@ -60,6 +60,51 @@ class OtomotoSpider(scrapy.Spider):
             cut_url = response.url[30:]
             car["url"] = cut_url
             
+            car["added"] = car["added"].strftime("%Y-%m-%d")
+            if params.get("Marka pojazdu"):
+                car["brand"] = params["Marka pojazdu"]
+            else:
+                car["brand"] = "None"
+            if params.get("Model pojazdu"):
+                car["model"] = params["Model pojazdu"]
+            else:
+                car["model"] = "None"
+            if params.get("Rok produkcji"):
+                car["year"] = params["Rok produkcji"]
+            else:
+                car["year"] = 0
+            if params.get("Przebieg"):
+                car["displacment"] = int(''.join(filter(str.isdigit, params["Przebieg"])))
+            else:
+                car["displacment"] = 0
+            if params.get("Rodzaj paliwa"):
+                car["fuel"] = params["Rodzaj paliwa"]
+            else:
+                car["fuel"] = "None"
+            if params.get("Moc"):
+                car["power"] = int(''.join(filter(str.isdigit, params["Moc"])))
+            else:
+                car["power"] = 0
+            if params.get("Skrzynia biegów"):
+                car["gearbox"] = params["Skrzynia biegów"]
+            else:
+                car["gearbox"] = "None"
+            if params.get("Napęd"):
+                car["drive"] = params["Napęd"]
+            else:
+                car["drive"] = "None"
+            if params.get("Typ nadwozia"):
+                car["chassis"] = params["Typ nadwozia"]
+            else:
+                car["chassis"] = "None"
+            if params.get("Kolor"):
+                car["color"] = params["Kolor"]
+            else:
+                car["color"] = "None"
+            if params.get("Kraj pochodzenia"):
+                car["import_country"] = params["Kraj pochodzenia"]
+            else:
+                car["import_country"] = "None"
+            
             yield car
-
 

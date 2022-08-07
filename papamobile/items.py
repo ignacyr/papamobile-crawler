@@ -8,14 +8,14 @@ import scrapy
 
 class Car(scrapy.Item):
     url = scrapy.Field()
-    time_date = scrapy.Field()
+    added = scrapy.Field()
     price = scrapy.Field()
     title = scrapy.Field()
     
     brand = scrapy.Field()
     model = scrapy.Field()
-    year_of_prod = scrapy.Field()
-    displacement = scrapy.Field()
+    year = scrapy.Field()
+    displacment = scrapy.Field()
     fuel = scrapy.Field()
     power = scrapy.Field()
     gearbox = scrapy.Field()

@@ -7,6 +7,8 @@
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
 from scrapy_dynamodb import DynamoDbPipeline
+import requests
+import json
 
 
 # CSV Pipeline
@@ -16,5 +18,6 @@ from scrapy_dynamodb import DynamoDbPipeline
 #             f.write(f'{item["time_date"]};{item["url"]};{item["title"]};{item["price"]}\n')
 
 class RestApiPipeline:
-    pass
-
+    def process_item(self, item, spider):
+        api_url = "http://34.141.144.103:8000/base/add"
+        response = requests.post(api_url, json=dict(item))
