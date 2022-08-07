@@ -25,7 +25,7 @@ CONCURRENT_REQUESTS = 1
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 4
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -69,9 +69,16 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'papamobile.pipelines.PapamobilePipeline': 300,
-#}
+ITEM_PIPELINES = {
+    # 'papamobile.pipelines.PapamobilePipeline': 1,
+    'papamobile.pipelines.DynamoDbPipeline': 2,
+}
+
+# AWS_ACCESS_KEY_ID = '<aws access key id>'
+# AWS_SECRET_ACCESS_KEY = '<aws secret access key>'
+DYNAMODB_PIPELINE_REGION_NAME = 'eu-central-1'
+DYNAMODB_PIPELINE_TABLE_NAME = 'papamobile'
+# DYNAMODB_ENDPOINT_URL = 'dynamodb.eu-central-1.amazonaws.com'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

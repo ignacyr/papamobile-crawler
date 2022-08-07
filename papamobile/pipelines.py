@@ -6,8 +6,13 @@
 
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
+from scrapy_dynamodb import DynamoDbPipeline
 
 
-class PapamobilePipeline:
-    def process_item(self, item, spider):
-        return item
+# CSV Pipeline
+# class PapamobilePipeline:
+#     def process_item(self, item, spider):
+#         with open("data.csv", "a") as f:
+#             f.write(f'{item["time_date"]};{item["url"]};{item["title"]};{item["price"]}\n')
+
+
