@@ -7,7 +7,7 @@ class OtomotoSpider(scrapy.Spider):
     name = "otomoto"
     
     def start_requests(self):
-        self.yesterday = datetime.today().date() #- timedelta(days=1)
+        self.yesterday = datetime.today().date() - timedelta(days=1)
         
         urls = [
             f'https://www.otomoto.pl/osobowe?search%5Border%5D=created_at_first%3Adesc&page={i}'
@@ -61,7 +61,5 @@ class OtomotoSpider(scrapy.Spider):
             car["url"] = cut_url
             
             yield car
-            
-            # with open("data.json", "a") as f:
-            #     f.write(f"{time_date};{title};{price};{params};{features}\n")
+
 
