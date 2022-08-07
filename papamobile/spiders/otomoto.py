@@ -11,7 +11,7 @@ class OtomotoSpider(scrapy.Spider):
         
         urls = [
             f'https://www.otomoto.pl/osobowe?search%5Border%5D=created_at_first%3Adesc&page={i}'
-            for i in range(1, 2)
+            for i in range(1, 501)
         ]
         for url in urls:
             yield scrapy.Request(url=url, callback=self.parse)
