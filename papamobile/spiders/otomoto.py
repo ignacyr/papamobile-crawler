@@ -73,8 +73,8 @@ class OtomotoSpider(scrapy.Spider):
                 car["year"] = params["Rok produkcji"]
             else:
                 car["year"] = 0
-            if params.get("Przebieg"):
-                car["displacment"] = int(''.join(filter(str.isdigit, params["Przebieg"])))
+            if params.get("Pojemność skokowa"):
+                car["displacment"] = int(''.join(filter(str.isdigit, params["Pojemność skokowa"])))
             else:
                 car["displacment"] = 0
             if params.get("Rodzaj paliwa"):
