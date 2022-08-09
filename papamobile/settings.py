@@ -72,7 +72,7 @@ DOWNLOADER_MIDDLEWARES = {
 ITEM_PIPELINES = {
     # 'papamobile.pipelines.PapamobilePipeline': 1,
     'papamobile.pipelines.RestApiPipeline': 2,
-    # 'papamobile.pipelines.DynamoDbPipeline': 3,
+    'papamobile.pipelines.DynamoDbPipeline': 3,
 }
 
 # AWS_ACCESS_KEY_ID = '<aws access key id>'

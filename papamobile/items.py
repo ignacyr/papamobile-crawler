@@ -23,3 +23,4 @@ class Car(scrapy.Item):
     chassis = scrapy.Field()
     color = scrapy.Field()
     import_country = scrapy.Field()
+    milage = scrapy.Field()

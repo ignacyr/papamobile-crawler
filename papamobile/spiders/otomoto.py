@@ -11,7 +11,7 @@ class OtomotoSpider(scrapy.Spider):
         
         urls = [
             f'https://www.otomoto.pl/osobowe?search%5Border%5D=created_at_first%3Adesc&page={i}'
-            for i in range(1, 501)
+            for i in range(1, 201)
         ]
         for url in urls:
             yield scrapy.Request(url=url, callback=self.parse)
@@ -74,7 +74,7 @@ class OtomotoSpider(scrapy.Spider):
             else:
                 car["year"] = 0
             if params.get("Pojemność skokowa"):
-                car["displacment"] = int(''.join(filter(str.isdigit, params["Pojemność skokowa"])))
+                car["displacment"] = int(''.join(filter(str.isdigit, params["Pojemność skokowa"]))[:-1])
             else:
                 car["displacment"] = 0
             if params.get("Rodzaj paliwa"):
@@ -105,6 +105,9 @@ class OtomotoSpider(scrapy.Spider):
                 car["import_country"] = params["Kraj pochodzenia"]
             else:
                 car["import_country"] = "None"
-            
+            if params.get("Przebieg"):
+                car["milage"] = int(''.join(filter(str.isdigit, params["Przebieg"])))
+            else:
+                car["milage"] = "None"
             yield car
 

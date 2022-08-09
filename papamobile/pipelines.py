@@ -22,3 +22,4 @@ class RestApiPipeline:
         api_url = "http://34.141.144.103:8000/base/add"
         response = requests.post(api_url, json=dict(item))
         print(response.json())
+        return item
