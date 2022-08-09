@@ -5,10 +5,14 @@ from papamobile.items import Car
 
 class OtomotoSpider(scrapy.Spider):
     name = "otomoto"
-    
-    def start_requests(self):
+
+    def __init__(self, name=None, **kwargs):
+        super().__init__(name, **kwargs)
+        self.break_after_old = 100
         self.yesterday = datetime.today().date() - timedelta(days=1)
-        
+        self.old_cars_counter = 0 
+
+    def start_requests(self):
         urls = [
             f'https://www.otomoto.pl/osobowe?search%5Border%5D=created_at_first%3Adesc&page={i}'
             for i in range(1, 201)
@@ -110,4 +114,8 @@ class OtomotoSpider(scrapy.Spider):
             else:
                 car["milage"] = "None"
             yield car
+        else:
+            self.old_cars_counter += 1
 
+        if self.old_cars_counter >= self.break_after_old:
+            raise scrapy.exceptions.CloseSpider(reason=f"Scraped {self.break_after_old} cars data from before yesterday")
