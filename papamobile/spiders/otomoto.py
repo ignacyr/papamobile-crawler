@@ -114,7 +114,7 @@ class OtomotoSpider(scrapy.Spider):
             else:
                 car["milage"] = "None"
             yield car
-        else:
+        elif car["added"].date() < self.yesterday:
             self.old_cars_counter += 1
 
         if self.old_cars_counter >= self.break_after_old:
