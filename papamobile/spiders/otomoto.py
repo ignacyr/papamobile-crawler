@@ -67,53 +67,30 @@ class OtomotoSpider(scrapy.Spider):
             car["added"] = car["added"].strftime("%Y-%m-%d")
             if params.get("Marka pojazdu"):
                 car["brand"] = params["Marka pojazdu"]
-            else:
-                car["brand"] = "None"
             if params.get("Model pojazdu"):
                 car["model"] = params["Model pojazdu"]
-            else:
-                car["model"] = "None"
             if params.get("Rok produkcji"):
                 car["year"] = params["Rok produkcji"]
-            else:
-                car["year"] = 0
             if params.get("Pojemność skokowa"):
                 car["displacment"] = int(''.join(filter(str.isdigit, params["Pojemność skokowa"]))[:-1])
-            else:
-                car["displacment"] = 0
             if params.get("Rodzaj paliwa"):
                 car["fuel"] = params["Rodzaj paliwa"]
-            else:
-                car["fuel"] = "None"
             if params.get("Moc"):
                 car["power"] = int(''.join(filter(str.isdigit, params["Moc"])))
-            else:
-                car["power"] = 0
             if params.get("Skrzynia biegów"):
                 car["gearbox"] = params["Skrzynia biegów"]
-            else:
-                car["gearbox"] = "None"
             if params.get("Napęd"):
                 car["drive"] = params["Napęd"]
-            else:
-                car["drive"] = "None"
             if params.get("Typ nadwozia"):
                 car["chassis"] = params["Typ nadwozia"]
-            else:
-                car["chassis"] = "None"
             if params.get("Kolor"):
                 car["color"] = params["Kolor"]
-            else:
-                car["color"] = "None"
             if params.get("Kraj pochodzenia"):
                 car["import_country"] = params["Kraj pochodzenia"]
-            else:
-                car["import_country"] = "None"
             if params.get("Przebieg"):
                 car["milage"] = int(''.join(filter(str.isdigit, params["Przebieg"])))
-            else:
-                car["milage"] = "None"
             yield car
+
         elif car["added"].date() < self.yesterday:
             self.old_cars_counter += 1
 
