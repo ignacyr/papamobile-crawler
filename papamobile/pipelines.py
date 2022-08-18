@@ -24,7 +24,9 @@ class TranslateLangPipeline:
                            'Szwajcaria': 'Switzerland', 'Włochy': 'Italy', 'Szwecja': 'Sweden', 'Luksemburg': 'Luxembourg', 
                            'Dania': 'Denmark', 'Hiszpania': 'Spain', 'Irlandia': 'Ireland', 'Kanada': 'Canada'}
         trans_colors = {'Biały': 'White', 'Szary': 'Gray', 'Czarny': 'Black', 'Czerwony': 'Red', 
-                        'Srebrny': 'Silver', 'Niebieski': 'Blue', 'Żółty': 'Yellow', 'Zielony': 'Green'}
+                        'Srebrny': 'Silver', 'Niebieski': 'Blue', 'Żółty': 'Yellow', 'Zielony': 'Green',
+                        'Złoty': 'Gold', 'Brązowy': 'Brown', 'Fioletowy': 'Purple', 'Inny kolor': 'Other',
+                        'Bordowy': 'Red', 'Beżowy': 'Other'}
         trans_fuel = {'Benzyna': 'Petrol', 'Hybryda': 'Hybrid', 'Elektryczny': 'Electric'}
 
         for key in item.keys():
