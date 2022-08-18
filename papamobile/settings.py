@@ -71,8 +71,9 @@ DOWNLOADER_MIDDLEWARES = {
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     # 'papamobile.pipelines.PapamobilePipeline': 1,
-    'papamobile.pipelines.RestApiPipeline': 2,
-    'papamobile.pipelines.DynamoDbPipeline': 3,
+    'papamobile.pipelines.TranslateLangPipeline': 2,
+    'papamobile.pipelines.RestApiPipeline': 3,
+    'papamobile.pipelines.DynamoDbPipeline': 1,
 }
 
 # AWS_ACCESS_KEY_ID = '<aws access key id>'

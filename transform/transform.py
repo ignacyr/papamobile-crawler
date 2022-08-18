@@ -8,9 +8,11 @@ if __name__ == "__main__":
     
     yesterday = date.today() - timedelta(days=1)
     yesterday = yesterday.strftime("%Y-%m-%dT00:00:00Z")
-    yesterday = "2022-08-15T00:00:00Z"
-    avg_price = round(all_df[all_df["added"] == yesterday]["price"].median())
     
-    resp_avg = requests.post("http://34.141.144.103:8000/base/daily_avg", {"date": yesterday, "price": avg_price})
+    yest_cars_df = all_df[all_df["added"] == yesterday]
+    avg_price = round(yest_cars_df["price"].median())
+    
+    resp_avg = requests.post("http://34.141.144.103:8000/base/daily_avg", {"date": yesterday, "price": avg_price, "count": len(yest_cars_df)})
     print(resp_avg.json())
 
+    
