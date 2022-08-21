@@ -9,6 +9,7 @@ from itemadapter import ItemAdapter
 from scrapy_dynamodb import DynamoDbPipeline
 import requests
 import json
+import os
 
 
 # CSV Pipeline
@@ -44,6 +45,8 @@ class TranslateLangPipeline:
 class RestApiPipeline:
     def process_item(self, item, spider):
         api_url = "http://34.141.144.103:8000/base/add"
-        response = requests.post(api_url, json=dict(item))
+        token = os.environ["PapiToken"]
+        headers = {'Accept': 'application/json', "Authorization": f"Token {token}"}
+        response = requests.post(api_url, json=dict(item), headers=headers)
         print(response.json())
         return item
